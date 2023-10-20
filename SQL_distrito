@@ -1,0 +1,37 @@
+-- En este update se hace por cada estado que tenga un carácter especial.
+UPDATE distrito
+SET NOM_ENT = 'San Luis Potosí'
+WHERE NOM_ENT LIKE 'San Luis Potos%';
+
+SELECT * FROM distrito
+WHERE NOM_ENT = 'Yucatán';
+
+-- Est sirve para ver individualmente los datos de NOM_ENT y que no salgan repetidos.
+SELECT DISTINCT NOM_ENT FROM distrito;
+--Este se usa cada vez que se quiera ver la tabla completa.
+SELECT * FROM distrito;
+-- Lo mismo que lo que mencioné antes pero ahora es como COMPLEJIDA.
+SELECT DISTINCT COMPLEJIDA FROM distrito;
+
+-- Este se utilizó para cambiar los caracteres especiales de COMPLEJIDA.
+UPDATE distrito
+SET COMPLEJIDA = 'Concentración Media'
+WHERE COMPLEJIDA LIKE 'Concentraci%';
+
+SELECT NOM_ENT FROM distrito
+WHERE NOM_ENT = 'Querétaro';
+
+-- Aquí se enlistó cada dato diferente del apartado COMPLEJIDA.
+Altamente Concentrado 1
+Altamente Concentrado 2
+Concentración Media
+Concentrado 1
+Concentrado 2
+Disperso 1
+Disperso 2
+Muy Disperso 1
+Muy Disperso 2;
+
+-- Esto fue utilizado para agregar dummy columns a la tabla entidad.
+ALTER TABLE dbo.distrito
+ADD ALT_CON_1 INT, ALT_CON_2 INT, CON_MED INT, CON1 INT, CON2 INT, DIS1 INT, DIS2 INT, M_DIS1 INT, M_DIS2 INT;
