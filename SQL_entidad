@@ -1,0 +1,8 @@
+-- Este sirve para ver toda la tabla de entidad previsualizada.
+SELECT * FROM entidad;
+
+-- Se usa este para actualizar estados en NOM_ENT que tengan carácteres especiales,
+-- En este caso usé el mismo para cambiarlo, por eso solo hay uno.
+UPDATE entidad
+SET NOM_ENT = 'Yucatán'
+WHERE NOM_ENT LIKE 'Yucat%';
