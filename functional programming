@@ -1,6 +1,4 @@
 Exercise 1: Find Prime Numbers
-python
-Copy code
 def is_prime(n):
     if n < 2:
         return False
