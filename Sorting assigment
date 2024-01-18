@@ -1,0 +1,257 @@
+Part 1: Sorting Algorithms Implementation.
+
+1. Bubble Sort Implementation:
+
+def bubble_sort(arr):
+    n = len(arr)
+    
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+# Test Bubble Sort
+arr_bubble = [64, 34, 25, 12, 22, 11, 90]
+bubble_sort(arr_bubble)
+print("Bubble Sort Result:", arr_bubble)
+
+2. Merge Sort Implementation:
+
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i = j = k = 0
+
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+
+# Test Merge Sort
+arr_merge = [64, 34, 25, 12, 22, 11, 90]
+merge_sort(arr_merge)
+print("Merge Sort Result:", arr_merge)
+
+3. Quick Sort Implementation:
+
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+
+    return quick_sort(left) + middle + quick_sort(right)
+
+# Test Quick Sort
+arr_quick = [64, 34, 25, 12, 22, 11, 90]
+arr_quick_sorted = quick_sort(arr_quick)
+print("Quick Sort Result:", arr_quick_sorted)
+
+
+Part 2: Searching Algorithms Implementation.
+
+4. Linear Search Implementation:
+
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return True
+    return False
+
+# Test Linear Search
+arr_linear = [64, 34, 25, 12, 22, 11, 90]
+target_linear = 22
+result_linear = linear_search(arr_linear, target_linear)
+print(f"Linear Search: Target {target_linear} {'found' if result_linear else 'not found'}")
+
+5. Binary Search Implementation:
+
+def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return True
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return False
+
+# Test Binary Search (requires a sorted array)
+arr_binary = [11, 12, 22, 25, 34, 64, 90]
+target_binary = 22
+result_binary = binary_search(arr_binary, target_binary)
+print(f"Binary Search: Target {target_binary} {'found' if result_binary else 'not found'}")
+
+
+Part 3: Time Complexity Analysis.
+
+Time Complexity Analysis:
+
+- Bubble Sort: O(n^2)
+
+  > In the worst case, it has to perform n iterations for n elements, resulting in n^2 comparisons and swaps.
+
+- Merge Sort: O(n log n)
+
+  > It divides the array in half recursively and then merges the sorted halves. The division takes log n time, and merging takes linear time.
+
+- Quick Sort: O(n^2) (worst case), O(n log n) (average case)
+
+  > In the worst case, the pivot selection may lead to a highly unbalanced partition, resulting in quadratic time complexity. On average, it achieves a time complexity of O(n log n).
+
+- Linear Search: O(n)
+
+  > It needs to traverse the entire array in the worst case to find the target.
+
+- Binary Search: O(log n)
+
+  > It efficiently halves the search space with each comparison, resulting in a logarithmic time complexity.
+
+
+Part 4: Evaluate and Compare.
+
+sorting_algorithms.py:
+
+import time
+import random
+
+# Bubble Sort Implementation
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+# Merge Sort Implementation
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i = j = k = 0
+
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+# Quick Sort Implementation
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+
+    return quick_sort(left) + middle + quick_sort(right)
+
+# Linear Search Implementation
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return True
+    return False
+
+# Binary Search Implementation
+def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return True
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return False
+
+# Extras: Time Complexity Analysis
+
+# Generate a random array of size 1000
+random_array = [random.randint(1, 1000) for _ in range(1000)]
+
+# Measure execution time for each sorting algorithm
+start_time = time.time()
+bubble_sort(random_array.copy())
+bubble_sort_time = time.time() - start_time
+
+start_time = time.time()
+merge_sort(random_array.copy())
+merge_sort_time = time.time() - start_time
+
+start_time = time.time()
+quick_sort(random_array.copy())
+quick_sort_time = time.time() - start_time
+
+# Print execution times
+print(f"Bubble Sort Time: {bubble_sort_time}")
+print(f"Merge Sort Time: {merge_sort_time}")
+print(f"Quick Sort Time: {quick_sort_time}")
+
+analysis.txt:
+
+Time Complexity Analysis:
+
+- Bubble Sort: O(n^2)
+  - In the worst case, it has to perform n iterations for n elements, resulting in n^2 comparisons and swaps.
+
+- Merge Sort: O(n log n)
+  - It divides the array in half recursively and then merges the sorted halves. The division takes log n time, and merging takes linear time.
+
+- Quick Sort: O(n^2) (worst case), O(n log n) (average case)
+  - In the worst case, the pivot selection may lead to a highly unbalanced partition, resulting in quadratic time complexity. On average, it achieves a time complexity of O(n log n).
+
+- Linear Search: O(n)
+  - It needs to traverse the entire array in the worst case to find the target.
+
+- Binary Search: O(log n)
+  - It efficiently halves the search space with each comparison, resulting in a logarithmic time complexity.
+
+Evaluate and Compare:
+
+Bubble Sort Time: ...
+Merge Sort Time: ...
+Quick Sort Time: ...
+
+*** Replace the ellipses (...) with the actual execution times obtained during testing.
+
