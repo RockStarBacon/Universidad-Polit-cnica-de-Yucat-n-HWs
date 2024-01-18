@@ -1,0 +1,100 @@
+1. Constant Time (O(1)):
+
+def constant_time_sort(lst):
+    # This algorithm is not actually sorting, just returning the list as is
+    return lst
+
+# Example Usage:
+original_list = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+result = constant_time_sort(original_list.copy())
+print("Constant Time Sorted:", result)
+
+
+2. Logarithmic Time (O(log n)):
+
+def logarithmic_time_sort(lst):
+    # Using built-in sort function which usually has O(n log n) complexity
+    return sorted(lst)
+
+# Example Usage:
+original_list = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+result = logarithmic_time_sort(original_list.copy())
+print("Logarithmic Time Sorted:", result)
+
+
+3. Linear Time (O(n)):
+
+def linear_time_sort(lst):
+    # Using counting sort assuming the elements are integers within a certain range
+    max_element = max(lst)
+    count = [0] * (max_element + 1)
+
+    for num in lst:
+        count[num] += 1
+
+    sorted_list = []
+    for i in range(max_element + 1):
+        sorted_list.extend([i] * count[i])
+
+    return sorted_list
+
+# Example Usage:
+original_list = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+result = linear_time_sort(original_list.copy())
+print("Linear Time Sorted:", result)
+
+
+4. Linearithmic Time (O(n log n)):
+
+def linearithmic_time_sort(lst):
+    # Using merge sort which has O(n log n) complexity
+    if len(lst) <= 1:
+        return lst
+
+    mid = len(lst) // 2
+    left = lst[:mid]
+    right = lst[mid:]
+
+    left = linearithmic_time_sort(left)
+    right = linearithmic_time_sort(right)
+
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+# Example Usage:
+original_list = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+result = linearithmic_time_sort(original_list.copy())
+print("Linearithmic Time Sorted:", result)
+
+
+5. Quadratic Time (O(n^2)):
+
+def quadratic_time_sort(lst):
+    # Using bubble sort which has O(n^2) complexity
+    n = len(lst)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if lst[j] > lst[j+1]:
+                lst[j], lst[j+1] = lst[j+1], lst[j]
+
+    return lst
+
+# Example Usage:
+original_list = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+result = quadratic_time_sort(original_list.copy())
+print("Quadratic Time Sorted:", result)
